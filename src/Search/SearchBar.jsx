@@ -1,17 +1,33 @@
-import React from 'react'
+// import React from 'react'
+import React, { useState } from 'react';
 
-function ClassBar(){
+function SearchBar(){
+
+  const [searchInput, setSearchInput] = useState("")
+
+  function submitHandler(e){
+    e.preventDefault()
+    console.log("poop")
+  }
+
+ function changeHandler(e){
+    setSearchInput(e)
+    
+
+  }
+
+
 
     return(
-        <form>
-            <label>
-              <input className="search-bar" type="text" name="name" placeholder="Search for a movie" />
-            </label>
-            <input type="submit" value="Search" />
-          </form>
+      <form onSubmit={(e)=>{submitHandler(e)}} >
+        <label>
+        <input value={searchInput} onChange={(e)=>{changeHandler(e.target.value)}} className="search-bar" type="text" name="name" placeholder="Search for a movie" />
+      </label>
+      <input type="submit" value="Search" />
+    </form>
     )
 
 
 }
 
-export default ClassBar
+export default SearchBar
