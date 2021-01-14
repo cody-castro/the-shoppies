@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MovieCard from './MovieCard'
 const API_KEY = process.env.REACT_APP_API_KEY
 
-function SearchBar(){
+function SearchBar(props){
 
   const [searchInput, setSearchInput] = useState("")
   const [returnedMovies, setReturnedMovies] = useState([])
@@ -19,8 +19,6 @@ function SearchBar(){
     .then(movies => {
       setReturnedMovies([movies])
     })
-
-    console.log(typeof returnedMovies)
   }
 
   function displayMovieCard(){

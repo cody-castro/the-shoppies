@@ -8,7 +8,7 @@ function HomePage(){
         return (
           <>
           <h1>Welcome to The Shoppies</h1>
-          <SearchBar></SearchBar>
+          <SearchBar key="searchbar"></SearchBar>
     
       </>
       )
