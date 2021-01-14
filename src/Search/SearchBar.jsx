@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MovieCard from './MovieCard'
 const API_KEY = process.env.REACT_APP_API_KEY
 
-function SearchBar(props){
+function SearchBar(){
 
   const [searchInput, setSearchInput] = useState("")
   const [returnedMovies, setReturnedMovies] = useState([])
@@ -15,18 +15,23 @@ function SearchBar(props){
 
  function changeHandler(searchTerm){
     setSearchInput(searchTerm)
+    
     fetch(`http://www.omdbapi.com/?s=${searchTerm}&apikey=${API_KEY}`).then(resp => resp.json())
     .then(movies => {
+      // console.log(movies);
       setReturnedMovies([movies])
     })
   }
 
   function displayMovieCard(){
+    console.log(returnedMovies)
     
     return(
-      returnedMovies.map( movie =>{
-
-    return <MovieCard key={movie.imdbID} title={movie.title} poster={movie.poster}/>;
+      returnedMovies.map(movie =>{
+       return movie.Search ? 
+       <MovieCard key={movie.Search[0].imdbID} title={movie.Search[0].Title} poster={movie.Search[0].Poster}/> 
+       : 
+       <MovieCard key="666" title="Not Found" poster="not found"/>
     })  
 
     )
@@ -35,6 +40,7 @@ function SearchBar(props){
 
     return(
       <>
+
       <form onSubmit={(e)=>{submitHandler(e)}} >
         <label>
         <input value={searchInput} onChange={(e)=>{changeHandler(e.target.value)}} className="search-bar" type="text" name="name" placeholder="Search for a movie" />
